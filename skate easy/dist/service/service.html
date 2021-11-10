@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ja" class=>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../src/styles_dev.css">
+  <title>スケートイージーサンプル</title>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .huchidori{
+      text-shadow:1px 1px 0 #FFF, -1px -1px 0 #FFF,
+              -1px 1px 0 #FFF, 1px -1px 0 #FFF,
+              0px 1px 0 #FFF,  0-1px 0 #FFF,
+              -1px 0 0 #FFF, 1px 0 0 #FFF;
+    }
+  </style>
+</head>
+<body class="tracking-wider font-mono relative">
+  
+  <div id="app">
+
+    <!-- ここからヘッダー -->
+    <header class="py-8 px-20 my-0 mx-auto max-w-6xl w-full flex justify-between absolute z-10 left-0 right-0">
+      <div class="header-left inline">
+        <h1 class="site-title sm:hidden"><a href="../index.html">Skate Easy!!</a></h1>           
+      </div>
+      <nav class="header-nav w-72 sm:hidden">
+        <ul class="nav-list flex justify-between">
+          <li><a href="../index.html">ホーム</a></li>
+          <li><a href="#parts-service">サービス</a></li>
+          <li><a href="#contact">お問い合わせ</a></li>
+        </ul>
+      </nav>
+      <button class="burger-btn md:hidden block top-8 right-8 fixed z-10" v-on:click='hamburgerPush'>
+        <span class="bar bar_top block w-8 h-1 bg-black mb-2" id="bar1"></span>
+        <span class="bar bar_mid block w-8 h-1 bg-black mb-2" id="bar2"></span>
+        <span class="bar bar_bottom block w-8 h-1 bg-black" id="bar3"></span>
+      </button>
+      <ul class="ham-nav flex flex-col items-center justify-around fixed top-0 left-0 w-screen h-screen bg-gray-900 opacity-95 invisible duration-300" id="ham-nav">
+        <li><a href="../index.html" class="text-white" v-on:click="hamburgerNavPush">ホーム</a></li>
+        <li><a href="#parts-service" class="text-white" v-on:click="hamburgerNavPush">クリエイト！</a></li>
+        <li><a href="#contact" class="text-white" v-on:click="hamburgerNavPush">お問い合わせ</a></li>
+      </ul>
+    </header>
+    <!-- ここまでヘッダー -->
+    
+    <!-- ここからメイン -->
+  
+    <!-- ここからトップ -->
+    <main class=" w-full">
+      <div class="fv h-screen bg-blue-100  w-full relative">
+        <h1 class="huchidori text-5xl tracking-widest absolute top-1/3 left-1/2 transform -translate-x-1/2 text-center">Skate Easy</h1>
+        <p class="w-1/2 absolute top-1/2 left-1/2 transform -translate-x-1/2  text-center">「Skate Easy」であなたにとっての最高のスケートボードを見つけよう！
+          スケートボードをする目的や、あなたの体格、好みを入力することで最適なパーツを提案します。
+        </p>
+        <div class="button-wrapper w-72 absolute top-3/4 left-1/2 transform -translate-x-1/2 text-center">
+          <button>
+            <a href="#parts-service" class="link-btn bg-white text-center block w-32 leading-10 rounded-lg shadow-lg transition duration-300 ease-in-out  hover:transform hover:-translate-y-1 hover:scale-110 border-solid border-2 border-gray-500">パーツを組む！</a>
+          </button>
+        </div>
+      </div>
+      <!-- ここまでトップ -->
+  
+      <!-- ここからサービス -->
+      <section class="section-wrapper w-full" id="parts-service">
+        <div class="create-wrapper w-full py-36 border-solid border-b-2 border-gray-500">
+          <h2 class="w-4/5 my-0 mx-auto text-5xl text-blue-100 font-black sm:text-center">Create!</h2>
+          <div class="create-form w-3/5 my-0 mx-auto pt-28">
+            <form class="w-full" v-on:submit.prevent='setParts'>
+              <div class="form-part w-full flex justify-between mb-24">
+                <svg xmlns="http://www.w3.org/2000/svg" width="27" height="30" viewBox="0 0 27 30">
+                  <g id="Icon_feather-flag" data-name="Icon feather-flag" transform="translate(-4.5 -1.5)">
+                    <path id="パス_3" data-name="パス 3" d="M6,22.5S7.5,21,12,21s7.5,3,12,3,6-1.5,6-1.5V4.5S28.5,6,24,6,16.5,3,12,3,6,4.5,6,4.5Z" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+                    <path id="パス_4" data-name="パス 4" d="M6,33V22.5" transform="translate(0 -3)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+                  </g>
+                </svg>
+                <label for="">スケボーで何がしたい？</label>
+                <select name="goal" class="border-solid border-2 border-gray-500" v-model="selectGoal">
+                  <option disabled value="" class="text-center" selected>選択する</option>
+                  <option value="goal-1">かっこいい技をきめたい！</option>
+                  <!-- <option value="goal-2">気持ちよく外を走りたい！</option>
+                  <option value="goal-3">スノーボードのオフトレ</option> -->
+              </select>
+              </div>
+              <div class="form-part w-full flex justify-between mb-24">
+                <svg xmlns="http://www.w3.org/2000/svg" width="31.5" height="36" viewBox="0 0 31.5 36">
+                  <path id="Icon_awesome-hand-paper" data-name="Icon awesome-hand-paper" d="M28.742,9a2.857,2.857,0,0,0-2.867,2.868V18h-.562V5.61a2.857,2.857,0,0,0-2.867-2.868,2.813,2.813,0,0,0-2.758,2.812V18h-.562V2.868A2.857,2.857,0,0,0,16.258,0,2.813,2.813,0,0,0,13.5,2.813V18h-.562V5.681A2.857,2.857,0,0,0,10.07,2.813,2.813,2.813,0,0,0,7.313,5.625V22.218l-2.225-3.06A2.813,2.813,0,1,0,.538,22.467L9.369,34.61A3.375,3.375,0,0,0,12.1,36H25.992a3.375,3.375,0,0,0,3.285-2.6l1.864-7.921a13.5,13.5,0,0,0,.359-3.092V11.813A2.812,2.812,0,0,0,28.742,9Z" fill="#e5dac5"/>
+                </svg>              
+                <label for="">足の長さは？</label>
+                <select name="foot-length" class="border-solid border-2 border-gray-500" v-model="selectFoot">
+                  <option disabled value="" class="text-center" selected>選択する</option>
+                  <option value="foot-under-18">18cm以下</option>
+                  <option value="foot-19">19cm</option>
+                  <option value="foot-20">20cm</option>
+                  <option value="foot-21">21cm</option>
+                  <option value="foot-22">22cm</option>
+                  <option value="foot-23">23cm</option>
+                  <option value="foot-24">24cm</option>
+                  <option value="foot-25">25cm</option>
+                  <option value="foot-26">26cm</option>
+                  <option value="foot-27">27cm</option>
+                  <option value="foot-28">28cm</option>
+                  <option value="foot-29">29cm</option>
+                  <option value="foot-30">30cm</option>
+              </select>
+              </div>
+              <div class="form-part w-full flex justify-between mb-24">
+                <svg xmlns="http://www.w3.org/2000/svg" width="36.001" height="31.501" viewBox="0 0 36.001 31.501">
+                  <path id="Icon_awesome-heart" data-name="Icon awesome-heart" d="M32.505,4.4a9.615,9.615,0,0,0-13.12.956L18,6.785,16.615,5.358A9.615,9.615,0,0,0,3.495,4.4,10.1,10.1,0,0,0,2.8,19.02L16.4,33.068a2.2,2.2,0,0,0,3.185,0L33.195,19.02A10.09,10.09,0,0,0,32.505,4.4Z" transform="translate(0.001 -2.248)" fill="#e68282"/>
+                </svg>              
+                <label for="">乗り心地は？</label>
+                <select name="feeling" class="border-solid border-2 border-gray-500" v-model="selectFeeling">
+                  <option disabled value="" class="text-center" selected>選択する</option>
+                  <option value="casual">小回りが効く！</option>
+                  <option value="normal">標準</option>
+                  <option value="stable">安定感がある！</option>
+              </select>
+              </div>
+              <div class="form-send">
+                  <input type="submit" value="Create!" class="form-btn bg-gray-800 text-center block w-32 leading-10 rounded-lg shadow-lg transition duration-300 ease-in-out  hover:transform hover:-translate-y-1 hover:scale-110 border-solid border-2 border-gray-500 text-gray-50 my-0 mx-auto cursor-pointer">
+                </div>
+            </form>
+          </div>
+        </div>
+  
+          <!-- クリエイトボタン押した後 ここから -->
+    
+          <!-- ストリート -->
+          <div class="result-wrapper w-full py-36 hidden" id="street-wrapper">
+            <h2 class="w-4/5 my-0 mx-auto text-5xl text-blue-100 font-black sm:text-center">Result!</h2>
+            <ul class="result-list w-4/5 py-28 my-0 mx-auto">
+              <li class="result-item w-full">
+                <h3 class="text-3xl after:inline-block after:bg-gray-900 after:w-4/5 after:h-1 after:ml-8 after:align-middle sm:after:w-3/5">デッキ</h3>
+                <div class="deck-wrapper py-28 w-3/5 my-0 mx-auto flex justify-between items-center sm:flex-col">
+                  <div class="deck-img">
+                    <img src="../../img/street-deck.png" alt="ストリート用のデッキ">
+                  </div>
+                  <p class="text-2xl sm:mt-20" id="deck-inch">幅：○○インチ</p>
+                </div>
+              </li>
+              <li class="result-item w-full">
+                <h3 class="text-3xl after:inline-block after:bg-gray-900 after:w-4/5 after:h-1 after:ml-8 after:align-middle sm:after:w-3/5">トラック</h3>
+                <div class="truck-wrapper py-56 w-3/5 my-0 mx-auto flex justify-between items-center sm:flex-col">
+                  <div class="truck-img">
+                    <img src="../../img/street-truck.png" alt="ストリート用のトラック">
+                  </div>
+                  <div class="truck-p-wrapper text-center sm:mt-20">
+                    <p class="text-2xl" id="brand">ブランド：○○</p>
+                    <p class="text-2xl">の</p>
+                    <p class="text-2xl" id="height">高さ：○○</p>
+                  </div>
+                </div>
+              </li>
+              <li class="result-item w-full">
+                <h3 class="text-3xl after:inline-block after:bg-gray-900 after:w-4/5 after:h-1 after:ml-8 after:align-middle sm:after:w-3/5">ウィール</h3>
+                <div class="wheel-wrapper py-56 w-3/5 my-0 mx-auto flex justify-between items-center sm:flex-col">
+                  <div class="wheel-img">
+                    <img src="../../img/street-wheel.png" alt="ストリート用のウィール">
+                  </div>
+                  <div class="wheel-p-wrapper text-center sm:mt-20">
+                    <p class="text-2xl">硬さ：ハードウィール</p>
+                    <p class="text-2xl">の</p>
+                    <p class="text-2xl" id="wheel-size">大きさ：○○</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <div class="description-wrapper flex justify-between items-center w-4/5 my-0 mx-auto text-center">
+              <div class="description-img w-2/5">
+                <img src="../../img/desc-male.png" alt="解説するお兄さん">
+              </div>
+              <p class="text-2xl w-2/5">お疲れ様でした！この情報を参考にパーツを購入してみてください！</p>
+            </div>
+          </div>
+          <!-- ストリート -->
+    
+          <!-- クリエイトボタン押した後 ここまで -->
+      </section>
+      <!-- ここまでサービス -->
+    
+  
+      <!-- ここからお問い合わせ -->
+      <section class="section-wrapper w-full bg-gray-300">
+        <a id="contact">
+          <div class="form-content w-2/3 my-0 mx-auto py-28">
+            <h2 class="text-4xl text-gray-700 text-center mb-20">お問い合わせ</h2>
+            <div class="contact-form w-4/5 my-0 mx-auto max-w-6xl">
+              <form action="" v-on:submit="contactSend">
+                <div class="form-part flex flex-col mb-20">
+                  <label for="input-name">お名前</label>
+                  <input type="text" placeholder="Your Name" id="input-subject" class="border-solid border-2 border-gray-500">
+                </div>
+                <div class="form-part flex flex-col mb-20">
+                  <label for="input-mail">メールアドレス</label>
+                  <input type="text" placeholder="Your Email" id="input-subject" class="border-solid border-2 border-gray-500">
+                </div>
+                <div class="form-part flex flex-col mb-20">
+                  <label for="input-tel">電話番号</label>
+                  <input type="email" placeholder="Your Tel" id="input-subject" class="border-solid border-2 border-gray-500">
+                </div>
+                <div class="form-part flex flex-col mb-20">
+                  <label for="detail">お問い合わせ内容</label>
+                  <textarea name="" id="detail" cols="30" rows="5" class="border-solid border-2 border-gray-500 mb-24" placeholder="お問い合わせ内容をお書き下さい"></textarea>
+                </div>
+                <div class="form-send">
+                  <input type="submit" value="送信" class="form-btn bg-gray-800 text-center block w-32 leading-10 rounded-lg shadow-lg transition duration-300 ease-in-out  hover:transform hover:-translate-y-1 hover:scale-110 border-solid border-2 border-gray-500 text-gray-50 my-0 mx-auto">
+                </div>
+              </form>
+            </div>
+          </div>
+        </a>
+      </section>
+      <!-- ここまでお問い合わせ -->
+  
+    </main>
+    <!-- ここまでメイン -->
+    
+    <!-- ここからフッター -->
+    <footer>
+      <p class="text-xs text-center bg-gray-200 py-6">©︎ 2021 yanbo</p>
+    </footer>
+    <!-- ここまでフッター -->
+  </div>
+
+
+  <script src="../../js/vue.js"></script>
+  <script type="" src="../../js/script.js"></script>
+</body>
+</html>
